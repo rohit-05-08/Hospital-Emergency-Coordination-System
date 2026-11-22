@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CareConnect - Hospital Emergency Care Coordination System">
+    <title>CareConnect | Emergency Care Coordination</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <span>✚</span>
+            </div>
+            <div>
+                <h2>CareConnect</h2>
+                <small>Emergency Care Coordination</small>
+            </div>
+        </div>
+
+        <div class="nav-heading">HEALTHCARE MANAGEMENT</div>
+
+        <nav class="navigation">
+
+            <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#registration" class="nav-link" data-section="registration">
+                <span>＋</span> Patient Registration
+            </a>
+
+            <a href="#patients" class="nav-link" data-section="patients">
+                <span>♙</span> Patient Records
+            </a>
+
+            <a href="#beds" class="nav-link" data-section="beds">
+                <span>▣</span> Bed Management
+            </a>
+
+            <a href="#departments" class="nav-link" data-section="departments">
+                <span>✚</span> Departments
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="team-card">
+                <strong>Emergency Care Services</strong>
+                <small>Patient Coordination Portal</small>
+                <small>Hospital Resource Management</small>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h1 id="pageTitle">Emergency Dashboard</h1>
+                <p>Hospital Emergency Coordination System</p>
+            </div>
+
+            <div class="topbar-right">
+                <div class="healthcare-label">
+                    <span class="online-dot"></span>
+                    Emergency Care
+                </div>
+
+                <div class="admin-avatar">A</div>
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page-section active">
+
+            <div class="welcome-banner">
+
+                <div>
+                    <h2>Emergency Care Overview</h2>
+                    <p>
+                        Monitor patient intake, treatment progress,
+                        hospital beds and department availability.
+                    </p>
+                </div>
+
+                <button class="primary-button"
+                    onclick="showSection('registration')">
+                    + Register Patient
+                </button>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+
+                <div class="stat-card blue-card">
+                    <div class="stat-top">
+                        <span>Total Patients</span>
+                        <span class="stat-icon">♙</span>
+                    </div>
+                    <h2 id="totalPatients">0</h2>
+                    <small>Registered patient records</small>
+                </div>
+
+                <div class="stat-card red-card">
+                    <div class="stat-top">
+                        <span>Critical Patients</span>
+                        <span class="stat-icon">!</span>
+                    </div>
+                    <h2 id="criticalPatients">0</h2>
+                    <small>Active high-priority cases</small>
+                </div>
+
+                <div class="stat-card green-card">
+                    <div class="stat-top">
+                        <span>Available Beds</span>
+                        <span class="stat-icon">▣</span>
+                    </div>
+                    <h2 id="availableBeds">0</h2>
+                    <small>Unoccupied hospital beds</small>
+                </div>
+
+                <div class="stat-card orange-card">
+                    <div class="stat-top">
+                        <span>Under Treatment</span>
+                        <span class="stat-icon">✚</span>
+                    </div>
+                    <h2 id="treatmentPatients">0</h2>
+                    <small>Patients receiving care</small>
+                </div>
+
+            </div>
+
+
+            <!-- PRIORITY OVERVIEW -->
+            <div class="content-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Patient Triage Overview</h3>
+                        <p>Distribution of active emergency cases by priority</p>
+                    </div>
+                </div>
+
+                <div class="priority-bars">
+
+                    <div class="priority-row">
+                        <span>Critical</span>
+                        <div class="progress-track">
+                            <div id="criticalBar"
+                                class="progress-fill critical-fill"></div>
+                        </div>
+                        <strong id="criticalCount">0</strong>
+                    </div>
+
+                    <div class="priority-row">
+                        <span>Medium</span>
+                        <div class="progress-track">
+                            <div id="mediumBar"
+                                class="progress-fill medium-fill"></div>
+                        </div>
+                        <strong id="mediumCount">0</strong>
+                    </div>
+
+                    <div class="priority-row">
+                        <span>Low</span>
+                        <div class="progress-track">
+                            <div id="lowBar"
+                                class="progress-fill low-fill"></div>
+                        </div>
+                        <strong id="lowCount">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT PATIENTS -->
+            <div class="content-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Recent Patient Records</h3>
+                        <p>Recently registered emergency patients</p>
+                    </div>
+
+                    <button class="secondary-button"
+                        onclick="showSection('patients')">
+                        View All
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Priority</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="recentPatientsTable"></tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PATIENT REGISTRATION -->
+        <section id="registration" class="page-section">
+
+            <div class="content-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Emergency Patient Registration</h3>
+                        <p>Enter patient details and emergency information</p>
+                    </div>
+                </div>
+
+                <form id="registrationForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="patientName">Patient Name *</label>
+                            <input type="text"
+                                id="patientName"
+                                placeholder="Enter full name"
+                                maxlength="60"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patientAge">Age *</label>
+                            <input type="number"
+                                id="patientAge"
+                                min="1"
+                                max="120"
+                                step="1"
+                                placeholder="Enter age"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patientContact">Contact Number *</label>
+                            <input type="tel"
+                                id="patientContact"
+                                pattern="[0-9]{10}"
+                                maxlength="10"
+                                placeholder="10 digit mobile number"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emergencyType">Emergency Type *</label>
+                            <select id="emergencyType" required>
+                                <option value="">Select emergency type</option>
+                                <option>Accident</option>
+                                <option>Heart Problem</option>
+                                <option>Breathing Problem</option>
+                                <option>Injury</option>
+                                <option>Fever</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patientPriority">Triage Priority *</label>
+                            <select id="patientPriority" required>
+                                <option value="">Select priority</option>
+                                <option value="Critical">Critical</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patientDepartment">Department *</label>
+                            <select id="patientDepartment" required>
+                                <option value="">Select department</option>
+                                <option>Emergency</option>
+                                <option>Cardiology</option>
+                                <option>Orthopedics</option>
+                                <option>General</option>
+                                <option>Neurology</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="patientSymptoms">
+                                Symptoms / Description *
+                            </label>
+
+                            <textarea id="patientSymptoms"
+                                maxlength="500"
+                                placeholder="Enter emergency description..."
+                                required></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button type="reset" class="secondary-button">
+                            Clear Form
+                        </button>
+
+                        <button type="submit" class="primary-button">
+                            Register Patient
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- PATIENT RECORDS -->
+        <section id="patients" class="page-section">
+
+            <div class="content-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Patient Management</h3>
+                        <p>Manage patient information and treatment progress</p>
+                    </div>
+
+                    <button class="primary-button"
+                        onclick="showSection('registration')">
+                        + New Patient
+                    </button>
+                </div>
+
+                <div class="filter-bar">
+
+                    <input type="search"
+                        id="searchPatient"
+                        placeholder="Search patient name or ID...">
+
+                    <select id="filterPriority">
+                        <option value="">All Priorities</option>
+                        <option>Critical</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                    </select>
+
+                    <select id="filterStatus">
+                        <option value="">All Statuses</option>
+                        <option>Waiting</option>
+                        <option>Under Treatment</option>
+                        <option>Discharged</option>
+                    </select>
+
+                    <button class="secondary-button" id="clearFilters">
+                        Clear Filters
+                    </button>
+
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Priority</th>
+                                <th>Department</th>
+                                <th>Bed</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="patientTable"></tbody>
+                    </table>
+
+                </div>
+
+                <p id="patientCount" class="table-footer"></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- BED MANAGEMENT -->
+        <section id="beds" class="page-section">
+
+            <div class="content-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Hospital Bed Management</h3>
+                        <p>Monitor hospital bed occupancy and availability</p>
+                    </div>
+                </div>
+
+                <div class="bed-summary">
+
+                    <div class="bed-summary-item">
+                        <span>Total Beds</span>
+                        <strong id="totalBedCount">0</strong>
+                    </div>
+
+                    <div class="bed-summary-item">
+                        <span>Occupied Beds</span>
+                        <strong id="occupiedBedCount">0</strong>
+                    </div>
+
+                    <div class="bed-summary-item">
+                        <span>Available Beds</span>
+                        <strong id="freeBedCount">0</strong>
+                    </div>
+
+                </div>
+
+                <div class="bed-legend">
+                    <span>
+                        <i class="legend-dot available-dot"></i>
+                        Available
+                    </span>
+
+                    <span>
+                        <i class="legend-dot occupied-dot"></i>
+                        Occupied
+                    </span>
+                </div>
+
+                <div id="bedGrid" class="bed-grid"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DEPARTMENT MANAGEMENT -->
+        <section id="departments" class="page-section">
+
+            <div class="content-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Hospital Departments</h3>
+                        <p>View active patient distribution by department</p>
+                    </div>
+                </div>
+
+                <div id="departmentGrid" class="department-grid"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <p>CareConnect | Emergency Care Coordination System | CSE326</p>
+
+            <small>
+                Academic healthcare management project
+                - Not intended for real clinical use.
+            </small>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- NOTIFICATION -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+
+
